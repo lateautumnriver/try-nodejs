@@ -19,20 +19,14 @@ let todo_id_counter = 2
 
 
 /**
- * Error handler
- * @param err
- * @param req
- * @param res
- * @param next
+ * Middleware functions
+ * See https://expressjs.com/en/guide/using-middleware.html
  */
 function error_handler(err, req, res, next) {
-    console.error('ZZZ:', err)
+    console.error(err.stack)
     res.status(err.statusCode || 500).json({error: err.message})
 }
 
-/**
- * Functions for todos
- */
 function get_todos(req, res, next) {
     if (!req.query.completed) {
         return res.json(todos)
